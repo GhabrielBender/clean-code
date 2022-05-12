@@ -12,12 +12,25 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
     alias: {
-      path: path.join(__dirname, "src"),
+      "@": path.join(__dirname, "src"),
     },
   },
   module: {
     rules: [
-      { test: /\.ts(x?)$/, use: "babel-loader", exclude: /node_modules/ },
+      {
+        test: /\.ts(x?)$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
+        exclude: /node_modules/,
+      },
       {
         test: /\.scss$/,
         use: [
@@ -39,8 +52,14 @@ module.exports = {
   },
   devServer: {
     static: "./public",
-    // writeToDisk: true,
     historyApiFallback: true,
+    devMiddleware: {
+      index: true,
+      serverSideRender: true,
+      writeToDisk: true,
+    },
+    // publicPath: "/assets/", // here's the change
+    // contentBase: path.join(__dirname, "public"),
   },
   externals: {
     react: "React",
