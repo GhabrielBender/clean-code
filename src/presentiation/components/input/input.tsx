@@ -17,10 +17,10 @@ const Input: React.FC<Props> = (props: Props) => {
     })
   }
   const getStatus = () => {
-    return "🔴"
+    return error ? "🔴" : '🟢'
   }
   const getTitle = () => {
-    return error
+    return error || 'Tudo certo!'
   }
   return (
     <div className={Styles.inputWrap}>
