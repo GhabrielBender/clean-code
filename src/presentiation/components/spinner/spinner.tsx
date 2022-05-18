@@ -5,7 +5,7 @@ type Props = React.HTMLAttributes<HTMLElement>
 
 const Spinner: React.FC<Props> = (props: Props) => {
   return (
-    <div {...props} className={Styles.spinner}><div /><div /><div /><div /></div>
+    <div {...props} data-testId="spinner" className={Styles.spinner}><div /><div /><div /><div /></div>
   )
 }
 
